@@ -1,0 +1,20 @@
+version: "3"
+services:
+  app:
+    container_name: containerize_app_1
+    # your code goes here ...
+    build:  ./app
+    volumes:
+      - "./app/src/:/var/www/app/"
+
+  nginx:
+    container_name: containerize_nginx_1
+    # your code goes here ...
+    build: ./nginx
+    ports:
+      - '8000:80'
+      - '443:443'
+    volumes:
+      - "./nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - "./nginx/files/:/etc/ssl/"
+    restart: always
